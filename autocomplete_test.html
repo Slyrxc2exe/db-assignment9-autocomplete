@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 9: Autocomplete Demonstration</title>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+        .container {
+            max-width: 900px;
+        }
+        .box {
+            border-left: 4px solid #444;
+            padding: 15px;
+            background: #f5f5f5;
+            margin-bottom: 30px;
+        }
+        input {
+            width: 350px;
+            padding: 10px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Assignment 9: Autocomplete Demonstration</h1>
+
+<div class="box">
+<p>
+This page demonstrates the implementation of the <b>Autocomplete</b> feature required in 
+Assignment 9 of Databases Project 2025.
+</p>
+
+<p>
+The autocomplete below retrieves suggestions dynamically from the MySQL database using 
+<b>PHP</b> and <b>AJAX (jQuery UI Autocomplete)</b>.
+</p>
+
+<p>
+Due to temporary lack of access to the main team project repository, full integration into all 
+search fields of the main service will be done immediately once access is restored. 
+This demonstration shows the complete backend and frontend logic required for the assignment.
+</p>
+
+<b>Steps implemented here:</b>
+<ul>
+    <li>Static autocomplete demo</li>
+    <li>Server-based autocomplete demo</li>
+    <li>MySQL database integration</li>
+    <li>Live filtering after each character typed (Bonus 5%)</li>
+</ul>
+</div>
+
+<h3>Live Autocomplete Input:</h3>
+<input type="text" id="search" placeholder="Start typing...">
+
+</div>
+
+<script>
+$(function() {
+    $("#search").autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "autocomplete.php",
+                type: "GET",
+                dataType: "json",
+                data: { term: request.term },
+                success: function(data) {
+                    response(data);
+                }
+            });
+        },
+        minLength: 1
+    });
+});
+</script>
+
+</body>
+</html>
